@@ -61,18 +61,21 @@ $Id: grammar.xml,v 1.129 2010/11/13 23:24:21 dnaber Exp $
 			<example type="correct"><marker>tsokolate</marker></example>
 		</rule>
 
-		<rule id = "O_U_REPET" name = "No O->U change">
+		<rule id= "O_U_REPET" name = "no o/u change">
 			<pattern case_sensitive = "no">
 				<token regexp = "yes">.*u-.*o.*|.*o-.*u.*</token>
 			</pattern>
 
 			<message>
-				Avoid changing 'o' to 'u' in repeated words.
+				Avoid changing 'o' to 'u' in repeated words. Did you mean
+				<suggestion>
+            		<match no="1" regexp_match="u(-\w*o\w*)" regexp_replace="o$1"/>
+        		</suggestion>?
 			</message>
 			<short> Vowel consistency </short>
-			<example correction = "anu-ano" type = "incorrect"><marker>ano-ano</marker>
-			<example correction = "taun-taon" type = "incorrect"><marker>taon-taon</marker>
-			<example correction = "pisu-piso" type = "incorrect"><marker>piso-piso</marker>
+			<example correction = "ano-ano" type = "incorrect"><marker>anu-ano</marker></example>
+			<example correction = "taon-taon" type = "incorrect"><marker>taun-taon</marker></example>
+			<example correction = "piso-piso" type = "incorrect"><marker>pisu-piso</marker></example>
 		</rule>
 
 	</category>
