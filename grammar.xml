@@ -60,6 +60,21 @@ $Id: grammar.xml,v 1.129 2010/11/13 23:24:21 dnaber Exp $
 			<example correction= "tsismis" type="incorrect"><marker>chismis</marker></example>
 			<example type="correct"><marker>tsokolate</marker></example>
 		</rule>
+
+		<rule id = "O_U_REPET" name = "No O->U change">
+			<pattern case_sensitive = "no">
+				<token regexp = "yes">.*u-.*o.*|.*o-.*u.*</token>
+			</pattern>
+
+			<message>
+				Avoid changing 'o' to 'u' in repeated words.
+			</message>
+			<short> Vowel consistency </short>
+			<example correction = "anu-ano" type = "incorrect"><marker>ano-ano</marker>
+			<example correction = "taun-taon" type = "incorrect"><marker>taon-taon</marker>
+			<example correction = "pisu-piso" type = "incorrect"><marker>piso-piso</marker>
+		</rule>
+
 	</category>
 <!--
 	<category name="Style Rules">
