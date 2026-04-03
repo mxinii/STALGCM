@@ -9,39 +9,48 @@ Copyright (C) 2011 Nathaniel Oco and Allan Borra (http://www.dlsu.edu.ph/researc
 $Id: grammar.xml,v 1.129 2010/11/13 23:24:21 dnaber Exp $
 -->
 <rules lang="tl" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<category name="Sound and Letter Change">
-		<rule id="D" name="d (r)">
+	<category id="SOUND_LETTER_CHANGE" name="Sound and Letter Change">
+		<rule id="D_TO_R" name="d_to_r_conversion">
 			<pattern case_sensitive="no" mark_from="1">
-				<token regexp="yes">.*[aeiou]</token>
-				<token regexp="yes">ding?|dito|ditong|daw|diyang?|dyang?|doong?</token>
+				<!-- <token regexp="yes">.*[aeiou]</token>
+				<token regexp="yes">ding?|dito|ditong|daw|diyang?|dyang?|doong?</token> -->
+				<token regexp="yes">.+</token>
+        		<token regexp="yes">din|daw|dito|doon|diyan</token>
 			</pattern>
 
 			<message>
 				<suggestion>
-					<match no="2" case_conversion="startlower" regexp_match=".(.*)" regexp_replace="r$1"/>
+					<match no="2" regexp_match="(?i)d(.*)" regexp_replace="r$1"/>
 				</suggestion>
 			</message>
 			<short>Sound and Letter Change</short>
-			<example correction="rin" type="incorrect">Ka <marker>din</marker></example>
-			<example type="correct">Ka <marker>rin</marker></example>
+			<!-- <example correction="rin" type="incorrect">Ka <marker>din</marker></example>
+			<example type="correct">Ka <marker>rin</marker></example> -->
+			<example correction="rin" type="incorrect">Masaya <marker>din</marker></example>
+    		<example type="correct">Masaya rin</example>
 		</rule>
 
-		<rule id="RAW_RA_D" name = "ri/raw/ray/ra + din/daw">
+		<rule id="RAW_RA_D" name = "d_to_r_after_ra_raw_ray_ri">
 			<pattern case_sensitive = "no" mark_from="1">
-				<token regexp="yes">.*r(aw|ay|a|i)$</token>
-				<token regexp="yes">rin|raw</token>
+				<!-- <token regexp="yes">.*r(aw|ay|a|i)$</token>
+				<token regexp="yes">rin|raw</token> -->
+				<token regexp="yes">.*(ra|ri|raw|ray)</token>
+        		<token regexp="yes">rin|raw|rito|roon|riyan</token>
 			</pattern>
 
 			<message> 
 				Should be <suggestion>
-					<match no="2" case_conversion="startlower" regexp_match="r(.*)" regexp_replace="d$1"/>
+					<match no="2" regexp_match="(?i)r(.*)" regexp_replace="d$1"/>
 				</suggestion>
 				after words ending in ri/ra/raw/ray.
 			</message>
 			<short> Sound and Letter Change</short>
-			<example correction= "din" type="incorrect">maaari <marker>rin</marker></example>
+			<!-- <example correction= "din" type="incorrect">maaari <marker>rin</marker></example>
 			<example type="correct">Biray <marker>din</marker></example>
-			<example correction= "daw" type="incorrect">Kapara <marker>raw</marker></example>
+			<example correction= "daw" type="incorrect">Kapara <marker>raw</marker></example> -->
+			<example correction="din" type="incorrect">Maaari <marker>rin</marker></example>
+    		<example type="correct">Maaari din</example>
+   			<example correction="daw" type="incorrect">Para <marker>raw</marker></example>
 		</rule>
 
 		<rule id= "CH_TS" name = "ch(ts)">
@@ -52,7 +61,7 @@ $Id: grammar.xml,v 1.129 2010/11/13 23:24:21 dnaber Exp $
 			<message>
 			Use 'ts' instead of 'ch'. Did you mean
 				<suggestion>
-					<match no="1" regexp_match="ch" regexp_replace="ts"/>
+					<match no="1" regexp_match="(?i)ch" regexp_replace="ts"/>
 				</suggestion>?
 			</message>
 			<short> Sound and Letter Change</short>
@@ -61,21 +70,25 @@ $Id: grammar.xml,v 1.129 2010/11/13 23:24:21 dnaber Exp $
 			<example type="correct"><marker>tsokolate</marker></example>
 		</rule>
 
-		<rule id= "O_U_REPET" name = "no o/u change">
+		<rule id= "O_U_REPET" name = "no_o/u_change">
 			<pattern case_sensitive = "no">
-				<token regexp = "yes">.*u-.*o.*|.*o-.*u.*</token>
+				<!-- <token regexp = "yes">.*u-.*o.*|.*o-.*u.*</token> -->
+				<token regexp="yes">(?!paru-paro$).*u-.*o.*</token>
 			</pattern>
 
 			<message>
 				Avoid changing 'o' to 'u' in repeated words. Did you mean
 				<suggestion>
             		<match no="1" regexp_match="u(-\w*o\w*)" regexp_replace="o$1"/>
-        		</suggestion>?
+        		</suggestion>
 			</message>
 			<short> Vowel consistency </short>
 			<example correction = "ano-ano" type = "incorrect"><marker>anu-ano</marker></example>
 			<example correction = "taon-taon" type = "incorrect"><marker>taun-taon</marker></example>
 			<example correction = "piso-piso" type = "incorrect"><marker>pisu-piso</marker></example>
+			<example correction="patong-patong" type="incorrect"><marker>patung-patong</marker></example>
+    		<example correction="alon-alon" type="incorrect"><marker>alun-alon</marker></example>
+			<example type="correct">paru-paro</example>
 		</rule>
 
 	</category>
