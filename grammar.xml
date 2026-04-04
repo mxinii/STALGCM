@@ -5,25 +5,6 @@ title="Easy editing stylesheet" ?>
 
 <rules lang="tl" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<category id="SOUND_LETTER_CHANGE" name="Sound and Letter Change">
-		<rule id="D_TO_R" name="d_to_r_conversion">
-			<pattern case_sensitive="no" mark_from="1">
-				<!-- <token regexp="yes">.*[aeiou]</token>
-				<token regexp="yes">ding?|dito|ditong|daw|diyang?|dyang?|doong?</token> -->
-				<token regexp="yes">.+</token>
-        		<token regexp="yes">din|daw|dito|doon|diyan</token>
-			</pattern>
-
-			<message>
-				<suggestion>
-					<match no="2" regexp_match="(?i)d(.*)" regexp_replace="r$1"/>
-				</suggestion>
-			</message>
-			<short>Sound and Letter Change</short>
-			<!-- <example correction="rin" type="incorrect">Ka <marker>din</marker></example>
-			<example type="correct">Ka <marker>rin</marker></example> -->
-			<example correction="rin" type="incorrect">Masaya <marker>din</marker></example>
-    		<example type="correct">Masaya rin</example>
-		</rule>
 
 		<rule id="RAW_RA_D" name = "d_to_r_after_ra_raw_ray_ri">
 			<pattern case_sensitive = "no" mark_from="1">
@@ -65,36 +46,15 @@ title="Easy editing stylesheet" ?>
 			<example type="correct"><marker>tsokolate</marker></example>
 		</rule>
 
-		<rule id= "O_U_REPET_END" name = "no_o/u_change_end">
+		<rule id= "O_U_REPET" name = "no_o/u_change">
 			<pattern case_sensitive = "no">
-				<token regexp="yes">(?!paru-paro$).*u-.*o.*</token>
-			</pattern>
-
-			<message>
-				Avoid changing 'o' to 'u' in repeated words. Did you mean
-				<suggestion>
-            		<match no="1" regexp_match="u(-\w*o\w*)" regexp_replace="o$1"/>
-        		</suggestion>
-			</message>
-			<short> Vowel consistency </short>
-			<example correction = "ano-ano" type = "incorrect"><marker>anu-ano</marker></example>
-			<example correction = "piso-piso" type = "incorrect"><marker>pisu-piso</marker></example>
-			<example type="correct">paru-paro</example>
-		</rule>
-
-		<rule id= "O_U_REPET_NOTEND" name = "no_o/u_change_notend">
-			<pattern case_sensitive = "no">
-				<token regexp="yes">.*u.*</token>
-        		<token>-</token>
-        		<token regexp="yes">.*o.*</token>
+				 <token regexp="yes">\w*u\w*-\w*o\w*</token>
 			</pattern>
 
 			<message>
         		Avoid changing 'o' to 'u' in repeated words. Did you mean
         		<suggestion>
-        		    <match no="1" regexp_match="u(\w*-\w*o\w*)" regexp_replace="o"/>
-        		    <match no="2"/>
-        		    <match no="3"/>
+        		    <match no="1" regexp_match="^(\w*)u(\w*-\w*o\w*)$" regexp_replace="$1o$2"/>
        			</suggestion>?
     		</message>
 
@@ -102,6 +62,7 @@ title="Easy editing stylesheet" ?>
     		<example correction = "taon-taon" type = "incorrect"><marker>taun-taon</marker></example>
 			<example correction="patong-patong" type="incorrect"><marker>patung-patong</marker></example>
     		<example correction="alon-alon" type="incorrect"><marker>alun-alon</marker></example>
+			<example type="correct">paru-paro</example>
 		</rule>
 
 	</category>
