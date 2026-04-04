@@ -92,7 +92,7 @@ title="Easy editing stylesheet" ?>
 			<message>
         		Avoid changing 'o' to 'u' in repeated words. Did you mean
         		<suggestion>
-        		    <match no="1" regexp_match=""u(\w*-\w*o\w*)"" regexp_replace="o"/>
+        		    <match no="1" regexp_match="u(\w*-\w*o\w*)" regexp_replace="o"/>
         		    <match no="2"/>
         		    <match no="3"/>
        			</suggestion>?
